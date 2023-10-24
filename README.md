@@ -17,7 +17,7 @@ Where beams stop, we know that for this height there won't be any liquid it thei
 
 Then we count the number of bricks that are left on this height and substract that from the overal length of the spaceship.
 
-*Complexity: O(n^2)*
+*Complexity: O(n * max_height)*
 
 ### the solution (sofixit.cpp)
 We make an array where for each element we store the next bigger element to the right of it, and -1 if there is none. 

@@ -2,7 +2,7 @@
 #include <vector>
 
 long long material_brute(std::vector<int> spaceship){
-    // O(n^2)
+    // O(n * max_height)
     if(spaceship.size() == 0)
         return 0;
 
