@@ -1,10 +1,11 @@
-#include <iostream>
 #include <vector>
 #include <stack>
 
 long long material(std::vector<int> spaceship){
+    // O(n)
     if(spaceship.size() == 0)
         return 0;
+
     std::stack<std::pair<int, int> > s;
     std::vector<int> result(spaceship.size(), -1);
     s.push(std::make_pair(spaceship[0], 0));
@@ -23,9 +24,6 @@ long long material(std::vector<int> spaceship){
 
         s.push(std::make_pair(spaceship[i], i));
     }
-
-    // for (int i = 0; i < result.size(); i++)
-    //     std::cout << result[i] << " ";
 
     // make prefix sum of the spaceship
     std::vector<int> prefix_sum(spaceship.size(), 0);
@@ -49,13 +47,9 @@ long long material(std::vector<int> spaceship){
     for(int i = 0; i < spaceship.size(); i++){
         // there is no next bigger element, water would flow to the end
         if(result[i] == -1){
-            // std::cout << "result[i], i: " << result[i] << " " << i << " " << std::endl;
-            // std::cout << "spaceship[i]: " << spaceship[i] << " " << std::endl;
-            // std::cout << "largest_to_right[i]: " << largest_to_right[i] << std::endl;
-            // calculate the volume of water between current element and the largest element to the right
             if(largest_to_right[i] > i){
-                long long volume = (long long)(largest_to_right[i] - i - 1) * spaceship[largest_to_right[i]] - (prefix_sum[largest_to_right[i]-1] - prefix_sum[i]);
-                water += volume;
+                water += (long long)(largest_to_right[i] - i - 1) * spaceship[largest_to_right[i]] - \
+                (prefix_sum[largest_to_right[i]-1] - prefix_sum[i]);
                 // jump to the largest element to the right
                 i = largest_to_right[i] - 1;
             }
@@ -63,14 +57,10 @@ long long material(std::vector<int> spaceship){
         }
 
         // calculate the volume of water between current element and next bigger element
-        long long volume = (long long)(result[i] - i - 1) * spaceship[i] - (prefix_sum[result[i]-1] - prefix_sum[i]);
-        water += volume;
+        water += (long long)(result[i] - i - 1) * spaceship[i] - (prefix_sum[result[i]-1] - prefix_sum[i]);
 
         // make the jump to next bigger element
         i = result[i] - 1;
-        // std::cout << "result[i], i: " << result[i] << " " << i << " " << std::endl;
-        // std::cout << "spaceship[i]: " << spaceship[i] << " " << std::endl;
-        // std::cout << "prefix_sum[result[i] - 1], prefix_sum[i]: " << prefix_sum[result[i]-1] << " " << prefix_sum[i] << std::endl;
     }
     return water;
 }

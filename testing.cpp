@@ -5,10 +5,10 @@
 #include "sofixit.cpp"
 #include "brute.cpp"
 
-#define n 100
+#define NUM_TESTS 100
 
 int main() {
-    for(int i = 1; i <= n; i++) {
+    for(int i = 1; i <= NUM_TESTS; i++) {
         std::ifstream test_file("./tests/test" + std::to_string(i) + ".txt");
 
         int N;
@@ -28,7 +28,8 @@ int main() {
         if(material_result == material_brute_result) {
             std::cout << "ok" << std::endl;
         } else {
-            std::cout << "error, material outputed: " << material_result << " and brute outputed: " << material_brute_result << std::endl;
+            std::cout << "error, material outputed: " << material_result << " and brute outputed: " \
+            << material_brute_result << std::endl;
         }
     }
     return 0;
