@@ -26,10 +26,10 @@ long long material(std::vector<int> spaceship){
     }
 
     // make prefix sum of the spaceship
-    std::vector<int> prefix_sum(spaceship.size(), 0);
+    std::vector<long long> prefix_sum(spaceship.size(), 0);
     prefix_sum[0] = spaceship[0];
     for(int i = 1; i < spaceship.size(); i++)
-        prefix_sum[i] = prefix_sum[i-1] + spaceship[i];
+        prefix_sum[i] = (long long)prefix_sum[i-1] + spaceship[i];
 
     // make the largest to the right array
     std::vector<int> largest_to_right(spaceship.size(), -1);
